@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>sheet2gmap</title>
+    <title>gmap</title>
     <style>
       #map {
         height: 100%;
@@ -16,7 +16,6 @@
   </head>
   <body>
     <div id="map"></div>
-    <td><div id="sidebar"></div></td>
     <script src="constants.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDulz7tuaqsUaI-OY7KkTyK8RtapZbo20I&callback=initMap" async defer></script>
     <script>
@@ -70,11 +69,6 @@
         marker[i] = new google.maps.Marker({
           position: markerLatLng,
           map: map
-        });
-
-        var info = '<div style="font-size:18px;font-weight:bold;margin-bottom:10px;">' + data['名称'] + '</div>';
-        infoWindow[i] = new google.maps.InfoWindow({
-          content: info
         });
 
         markerEvent(i);
