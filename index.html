@@ -72,7 +72,7 @@
         });
               
         if (data['pic'] === 'on'){
-            info = "<div style='float:left'><img src='https://drive.google.com/uc?export=view&id=“+ data[‘pic_id’] + ”.png'></div><div style='float:right; padding: 10px;'><b>data['名称']</b></div>"
+            info = "<div style='float:left'><img src='https://drive.google.com/uc?export=view&id=data[‘pic_id’].png'></div><div style='float:right; padding: 10px;'><b>data['名称']</b></div>"
             infoWindow[i] = new google.maps.InfoWindow({
             content: info
           });
