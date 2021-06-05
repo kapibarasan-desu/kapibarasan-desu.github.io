@@ -72,7 +72,7 @@
         });
               
         if (data['pic'] === 'on'){
-          var info = '<div style="font-size:18px;font-weight:bold;margin-bottom:10px;"><a href="https://drive.google.com/uc?export=view&id=' + data[‘pic id’] + '"><img src="https://drive.google.com/uc?export=view&id=' + data[‘pic id’] + '" style="width: 650px; max-width: 100%; height: auto" title=“拡大”/></div>';
+          var info = '<div style="font-size:18px;font-weight:bold;margin-bottom:10px;"><a href="https://drive.google.com/uc?export=view&id=' + data[‘pic id’] + '"></a><img src="https://drive.google.com/uc?export=view&id=' + data[‘pic id’] + '" style="width: 650px; max-width: 100%; height: auto" title=“拡大”/></div>';
           infoWindow[i] = new google.maps.InfoWindow({
             content: info
           });
