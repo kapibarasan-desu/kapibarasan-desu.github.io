@@ -19,32 +19,14 @@
     <div id="map"></div>
     <script src="constants.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDulz7tuaqsUaI-OY7KkTyK8RtapZbo20I&callback=initMap" async defer></script>
+    <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
     <script>
       var map;
+      var geoloccontrol = new klokantech.GeolocationControl(map)
       var marker = [];
       var infoWindow = [];
       var windowOpened;
-
-      var myloc = new google.maps.Marker({
-        clickable: false,
-        icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
-                                                        new google.maps.Size(22,22),
-                                                        new google.maps.Point(0,18),
-                                                        new google.maps.Point(11,11)),
-        shadow: null,
-        zIndex: 999,
-        map: // your google.maps.Map object
-      });
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(pos) {
-            var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-            myloc.setPosition(me);
-        }, function(error) {
-            output.innerHTML = "座標位置を取得できません";
-        });
-      }
-
+      
       function parseData(data) {
         var keys = data.values[0];
         var markerData = [];
@@ -125,31 +107,6 @@
         windowOpened = infoWindow[i];
       }
 
-      function getMyPlace() {
-        var output = document.getElementById("result");
-        if (!navigator.geolocation){//Geolocation apiがサポートされていない場合
-          output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
-        return;
-        }
-        function success(position) {
-          var latitude  = position.coords.latitude;//緯度
-          var longitude = position.coords.longitude;//経度
-          output.innerHTML = '<p>緯度 ' + latitude + '° <br>経度 ' + longitude + '°</p>';
-          // 位置情報
-          var latlng = new google.maps.LatLng( latitude , longitude ) ;
-          // マーカーの新規出力
-          marker[1] = new google.maps.Marker( {
-            map: map ,
-            position: latlng ,
-          } ) ;
-          markerEvent(1);
-        };
-        function error() {
-        //エラーの場合
-        output.innerHTML = "座標位置を取得できません";
-        };
-        navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
-      }
     </script>
   </body>
 </html>
