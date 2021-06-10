@@ -17,7 +17,6 @@
   <body>
     <div id="header">眺望限界マップ</div>
     <p><button onclick="getMyPlace()">現在位置を取得</button></p>
-    <div id="result"></div>
     <div id="map"></div>
     <script src="constants.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDulz7tuaqsUaI-OY7KkTyK8RtapZbo20I&callback=initMap" async defer></script>
@@ -71,31 +70,6 @@
 	      map: map
         });
 
-        function getMyPlace() {
-          var output = document.getElementById("result");
-          if (!navigator.geolocation){//Geolocation apiがサポートされていない場合
-            output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
-          return;
-          }
-          function success(position) {
-            var latitude  = position.coords.latitude;//緯度
-            var longitude = position.coords.longitude;//経度
-            output.innerHTML = '<p>緯度 ' + latitude + '° <br>経度 ' + longitude + '°</p>';
-            // 位置情報
-            var latlng = new google.maps.LatLng( latitude , longitude ) ;
-            // マーカーの新規出力
-            marker[1] = new google.maps.Marker( {
-              map: map ,
-              position: latlng ,
-            } ) ;
-            markerEvent(1);
-          };
-          function error() {
-          //エラーの場合
-          output.innerHTML = "座標位置を取得できません";
-          };
-          navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
-        }
       }
 
       function addMarker(i, data) {
@@ -139,6 +113,32 @@
         }
         infoWindow[i].open(map, marker[i]);
         windowOpened = infoWindow[i];
+      }
+
+      function getMyPlace() {
+        var output = document.getElementById("map");
+        if (!navigator.geolocation){//Geolocation apiがサポートされていない場合
+          output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
+        return;
+        }
+        function success(position) {
+          var latitude  = position.coords.latitude;//緯度
+          var longitude = position.coords.longitude;//経度
+          output.innerHTML = '<p>緯度 ' + latitude + '° <br>経度 ' + longitude + '°</p>';
+          // 位置情報
+          var latlng = new google.maps.LatLng( latitude , longitude ) ;
+          // マーカーの新規出力
+          marker[1] = new google.maps.Marker( {
+            map: map ,
+            position: latlng ,
+          } ) ;
+          markerEvent(1);
+        };
+        function error() {
+        //エラーの場合
+        output.innerHTML = "座標位置を取得できません";
+        };
+        navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
       }
 
     </script>
