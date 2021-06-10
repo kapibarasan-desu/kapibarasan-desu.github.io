@@ -116,12 +116,11 @@
         windowOpened = infoWindow[i];
       }
 
-
       function getMyPlace() {
         var output = document.getElementById("result");
         if (!navigator.geolocation){//Geolocation apiがサポートされていない場合
           output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
-        return;
+          return;
         }
         function success(position) {
           var latitude  = position.coords.latitude;//緯度
@@ -141,7 +140,6 @@
         };
         navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
       }
-
     </script>
   </body>
 </html>
