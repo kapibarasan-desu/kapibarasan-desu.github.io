@@ -43,12 +43,12 @@
       function initMap() {
         var target = document.getElementById('map');
         var centerp = {lat: 35.6679191, lng: 139.4606805};
-    
+
         map = new google.maps.Map(target, {
           center: centerp,
           zoom: 7,
         });
-    
+
         var request = new XMLHttpRequest();
         request.open('GET', `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/sheet1?key=${API_KEY}`, true);
         request.responseType = 'json';
@@ -61,14 +61,38 @@
 
         request.send();
 
-        // KMLファイルをロードしてKmlLayerを生成
-        var kmlLayer = new google.maps.KmlLayer({
-	    url: 'https://drive.google.com/uc?id=1HSPe6oo5KapZXZVJ-FnhYKnvgA_wtngd',
-	    suppressInfoWindows: false,
-	    preserveViewport: false,
-	    map: map
-        });
+        // GeoJson をロード
+        map.data.loadGeoJson('https://drive.google.com/uc?id=1h7sWc42I8oka8pLpX4vCv4_LjahZk-8p');
 
+        // スタイルの設定
+	      map.data.setStyle(function(feature) {
+	      if (feature.getProperty('type') === 'point') {
+		    // マーカーのスタイル
+		    return ({
+			          icon: {
+			          	url:  feature.getProperty('icon'),
+			          	scaledSize: new google.maps.Size(32, 32)
+	                      }
+			          }); 
+		    } else if (feature.getProperty('type') === 'polyline') {
+        	    // ポリラインのスタイル
+		        return ({
+		    		    strokeColor: '#0000ff',
+		    		    strokeWeight: 2,
+		    		    clickable: true,
+		    		    zIndex: 1
+		    	        });
+		    } else if (feature.getProperty('type') === 'polygon'){
+		    	// ポリゴンのスタイル
+		    	return ({
+		    		    fillColor: '#ff0000',
+		    		    fillOpacity: 0.5,
+		    		    strokeWeight: 0,
+		    		    clickable: true,
+		    		    zIndex: 1
+		    	      });
+		          }
+	      });
       }
 
       function addMarker(i, data) {
