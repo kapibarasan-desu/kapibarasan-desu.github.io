@@ -49,6 +49,13 @@
           zoom: 7,
         });
 
+        // KMLファイルをロードしてKmlLayerを生成
+        var kmlLayer = new google.maps.KmlLayer({
+	    url: 'https://drive.google.com/uc?id=1HSPe6oo5KapZXZVJ-FnhYKnvgA_wtngd',
+	    suppressInfoWindows: true,
+	    map: map
+        });
+    
         var request = new XMLHttpRequest();
         request.open('GET', `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/sheet1?key=${API_KEY}`, true);
         request.responseType = 'json';
@@ -60,13 +67,6 @@
         };
 
         request.send();
-
-        // KMLファイルをロードしてKmlLayerを生成
-        var kmlLayer = new google.maps.KmlLayer({
-	    url: 'https://drive.google.com/uc?id=1HSPe6oo5KapZXZVJ-FnhYKnvgA_wtngd',
-	    suppressInfoWindows: true,
-	    map: map
-        });
       }
 
       function addMarker(i, data) {
