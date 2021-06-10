@@ -60,6 +60,13 @@
         };
 
         request.send();
+
+        // KMLファイルをロードしてKmlLayerを生成
+        var kmlLayer = new google.maps.KmlLayer({
+	    url: 'https://drive.google.com/file/d/1HSPe6oo5KapZXZVJ-FnhYKnvgA_wtngd/view',
+	    suppressInfoWindows: true,
+	    map: map
+        });
       }
 
       function addMarker(i, data) {
