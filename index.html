@@ -128,17 +128,12 @@
           output.innerHTML = '<p>緯度 ' + latitude + '° <br>経度 ' + longitude + '°</p>';
           // 位置情報
           var latlng = new google.maps.LatLng( latitude , longitude ) ;
-          // マップオプションを変数に格納
-          var mapOptions = {
-            zoom : 15,       // 拡大倍率
-            center : latlng  // 緯度・経度
-          };
           // マーカーの新規出力
           new google.maps.Marker( {
-            //position: latlng ,
+            position: latlng ,
             map: map ,
-            position: mapOptions.center,
           } ) ;
+          map.setCenter(latlng, 15);
         };
         function error() {
           //エラーの場合
