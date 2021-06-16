@@ -136,7 +136,21 @@
         };
         function error() {
           //エラーの場合
-          output.innerHTML = "座標位置を取得できません";
+          //output.innerHTML = "座標位置を取得できません";
+          switch(error.code) {
+              case 1: // PERMISSION_DENIED
+              output.innerHTML = "位置情報の利用が許可されていません";
+                break;
+              case 2: // POSITION_UNAVAILABLE
+                output.innerHTML = "現在位置が取得できませんでした";
+                break;
+              case 3: // TIMEOUT
+                output.innerHTML = "タイムアウトになりました";
+                break;
+              default:
+                output.innerHTML = "エラー(エラーコード:"+error.code+")";
+                break;
+            }
         };
         navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
       }
