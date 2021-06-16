@@ -133,7 +133,8 @@
             position: latlng ,
             map: map ,
           } ) ;
-          map.setCenter(latlng, 15);
+          map.setZoom(17);
+          map.panTo(latlng);
         };
         function error() {
           //エラーの場合
